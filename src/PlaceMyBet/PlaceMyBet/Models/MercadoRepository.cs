@@ -102,10 +102,10 @@ namespace PlaceMyBet.Models
             
         }
         public void ActualizarCuotas(Apuesta a)
-        {   
+        {   /*
             /// creo las formulas para sacar las nuevas cuotas con el objeto mercado cargado
-            //MySqlConnection con = Connect();
-            //MySqlCommand command = con.CreateCommand();
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
             /// para que aunque introduzcas puntos no te transforme el sql en comas
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -115,9 +115,9 @@ namespace PlaceMyBet.Models
             System.Threading.Thread.CurrentThread.CurrentCulture = culInfo;
             /// hay que actualizar tanto CuotaOver y CuotaUnder a la vez
             string consulta = string.Format("UPDATE mercados SET CuotaOver = '{0}' , CuotaUnder = '{1}' WHERE id_mercado = '{2}';", CuotaOver(a), CuotaUnder(a), a.Mercado_id_mercado );
-            //command.CommandText = consulta;
-            //Debug.WriteLine("comando" + command.CommandText);
-            /*try
+            command.CommandText = consulta;
+            Debug.WriteLine("comando" + command.CommandText);
+            try
             {
                 con.Open();
                 command.ExecuteNonQuery();
@@ -139,7 +139,7 @@ namespace PlaceMyBet.Models
             m = Retrieve();
             for(int i=0; i < m.Count; i++)
             {
-                if (m[i].id_mercado == a.Mercado_id_mercado)
+                if (m[i].MercadoId == a.Mercado_id_mercado)
                 {
                     double probOver;
                     probOver = m[i].DineroApostadoOver / (m[i].DineroApostadoOver + m[i].DineroApostadoUnder);
@@ -154,7 +154,7 @@ namespace PlaceMyBet.Models
             m = Retrieve();
             for (int i = 0; i < m.Count; i++)
             {
-                if (m[i].id_mercado == a.Mercado_id_mercado)
+                if (m[i].MercadoId == a.Mercado_id_mercado)
                 {
                     double probUnder;
                     probUnder = m[i].DineroApostadoUnder / (m[i].DineroApostadoOver + m[i].DineroApostadoUnder);

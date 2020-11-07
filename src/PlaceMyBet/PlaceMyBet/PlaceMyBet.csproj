@@ -338,11 +338,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\ApuestaRepository.cs" />
+    <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Mercado.cs" />
     <Compile Include="Models\MercadoRepository.cs" />
+    <Compile Include="Models\PlaceMyBetContext.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
