@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,28 +8,39 @@ namespace PlaceMyBet.Models
 {
     public class Apuesta
     {
-        public Apuesta(int id_apuesta, double mercadoOverUnder, string tipoOverUnder, double cuota, double dineroApostado, DateTime fecha, int mercado_id_mercado, string usuario_Email)
+        public Apuesta()
         {
-            this.id_apuesta = id_apuesta;
+
+        }
+        public Apuesta(int apuestaId, double mercadoOverUnder, string tipoOverUnder, double cuota, double dineroApostado, DateTime fecha, int mercadoId, string usuarioId)
+        {
+            ApuestaId=apuestaId;
             MercadoOverUnder = mercadoOverUnder;
             TipoOverUnder = tipoOverUnder.ToLower();
             Cuota = cuota;
             DineroApostado = dineroApostado;
             this.fecha = fecha;
-            Mercado_id_mercado = mercado_id_mercado;
-            Usuario_Email = usuario_Email;
+            MercadoId= mercadoId;
+            UsuarioId = usuarioId;
             
             
         }
 
-        public int id_apuesta { get; set; }
+        public int ApuestaId { get; set; }
         public double MercadoOverUnder { get; set; }
         public string TipoOverUnder { get; set; }
         public double Cuota { get; set; }
         public double DineroApostado { get; set; }
         public DateTime fecha { get; set; }
-        public int Mercado_id_mercado { get; set; }
-        public string Usuario_Email { get; set; }
+        public int Mercado_id_mercado { get; set; }//este el la FK de mercadosId, se tiene que borrar?? 
+        public string Usuario_Email { get; set; }//este es la foreign key de usuario Id, se tiene que borrar??
+        //USUARIO 1- N APUESTA
+        public string UsuarioId { get; set; }//clave foranea de usuarioEmail
+        public Usuario Usuario { get; set; }//una apuesta solo puede ser hecha por un usuario
+        //MERCADO 1-N APUESTA
+        public Mercado Mercado { get; set; }//las apuestas solo se hacen a un mercado concreto
+        public int MercadoId { get; set; }//Clave foranea MercadoId
+
     }
     public class ApuestaDTO
     {

@@ -1,30 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace PlaceMyBet.Models
 {
     public class Mercado
     {
-        public Mercado(int id_mercado, double overUnder, double cuotaOver, double cuotaUnder, double dineroApostadoOver, double dineroApostadoUnder, int eventos_Identificador_evento)
+        public Mercado()
         {
-            this.id_mercado = id_mercado;
+
+        }
+        public Mercado(int mercadoId, double overUnder, double cuotaOver, double cuotaUnder, double dineroApostadoOver, double dineroApostadoUnder, int eventosId)
+        {
+            MercadoId = mercadoId;
             OverUnder = overUnder;
             CuotaOver = cuotaOver;
             CuotaUnder = cuotaUnder;
             DineroApostadoOver = dineroApostadoOver;
             DineroApostadoUnder = dineroApostadoUnder;
-            Eventos_Identificador_evento = eventos_Identificador_evento;
+            EventosId = eventosId;
         }
 
-        public int id_mercado { get; set; }
+        public int MercadoId { get; set; }
         public double OverUnder { get; set; }
         public double CuotaOver { get; set; }
         public double CuotaUnder { get; set; }
         public double DineroApostadoOver { get; set; }
         public double DineroApostadoUnder { get; set; }
-        public int Eventos_Identificador_evento { get; set; }
+        public int EventosId { get; set; }
+        //MERCADOS 1 - N APUESTAS
+        public List<Apuesta> Apuestas { get; set; }//en un mercado puede haber muchas apuestas
+        //SE CREA PRIMERO EVENTO Y LUEGO MERCADO. EVENTOS 1 - N MERCADOS.
+        public int EventoId { get; set; }//FK de EventoId
+        public Evento Evento { get; set; }//lo relaciono con evento
+
     }
     public class MercadoDTO
     {
