@@ -9,14 +9,14 @@ namespace PlaceMyBet.Models
 {
     public class UsuarioRepository
     {
-        private MySqlConnection Connect()
+        /*private MySqlConnection Connect()
         {
             string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;uid=root;pwd=;Convert Zero Datetime=true;SslMode=none";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
-        }
+        }*/
         internal List<Usuario> Retrieve()
-        {
+        {/*
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "select * from usuarios";
@@ -32,7 +32,8 @@ namespace PlaceMyBet.Models
                 usuarios.Add(u);
             }
             con.Close();
-            return usuarios;
+            return usuarios;*/
+            return null;
         }
     }
 }

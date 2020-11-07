@@ -11,7 +11,7 @@ namespace PlaceMyBet.Controllers
     public class ApuestasController : ApiController
     {
         // GET: api/Apuestas
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public IEnumerable<ApuestaDTO> Get()
         {
             var repo = new ApuestaRepository();
@@ -23,7 +23,7 @@ namespace PlaceMyBet.Controllers
         /// Metodo para filtrar apuestas a traves de Email y Tipo
         /// </summary>        
         // GET: api/Apuestas?Email=Email&tipo=tipo
-        [Authorize(Roles = "Admin")]//Autorizo solo a ADMIN a hacer la consulta
+        //[Authorize(Roles = "Admin")]//Autorizo solo a ADMIN a hacer la consulta
         public IEnumerable<ApuestaFilter> GetApuesta(string email, string tipo)
         {
             var repo = new ApuestaRepository();
@@ -50,7 +50,7 @@ namespace PlaceMyBet.Controllers
             Apuesta a = repo.Retrieve();*/
             return null;
         }
-        [Authorize]//solo los usuarios logueados pueden hacer apuestas
+        //[Authorize]//solo los usuarios logueados pueden hacer apuestas
         // POST: api/Apuestas
         public void Post([FromBody]Apuesta apuesta)
         {

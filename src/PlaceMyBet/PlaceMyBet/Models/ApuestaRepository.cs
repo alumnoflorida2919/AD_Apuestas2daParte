@@ -11,56 +11,57 @@ namespace PlaceMyBet.Models
 {
     public class ApuestaRepository
     {
-        private MySqlConnection Connect()
+        /*private MySqlConnection Connect()
         {
             string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;uid=root;pwd=;Convert Zero Datetime=true;SslMode=none";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
-        }
+        }*/
         internal List<Apuesta> Retrieve()
         {
 
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from apuestas";
+            //MySqlConnection con = Connect();
+            //MySqlCommand command = con.CreateCommand();
+            //command.CommandText = "select * from apuestas";
 
-            con.Open();
-            MySqlDataReader res = command.ExecuteReader();
+            //con.Open();
+            //MySqlDataReader res = command.ExecuteReader();
             Apuesta a = null;
             List<Apuesta> apuestas = new List<Apuesta>();
-            while (res.Read())
-            {
+            //while (res.Read())
+            /*{
                 Debug.WriteLine("Recuperado: " + res.GetInt32(0) + " " + res.GetDouble(1) + " " + res.GetString(2) + " " + res.GetDouble(3) + " " + res.GetDouble(4) + " " + res.GetDateTime(5) + " " + res.GetInt32(6) + " " + res.GetString(7));
                 a = new Apuesta(res.GetInt32(0), res.GetDouble(1), res.GetString(2), res.GetDouble(3), res.GetDouble(4), res.GetDateTime(5), res.GetInt32(6), res.GetString(7));
                 apuestas.Add(a);
-            }
-            con.Close();
+            }*/
+            //con.Close();
             return apuestas;
         }
         internal List<ApuestaDTO> RetrieveDTO()
         {
 
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from apuestas";
+            //MySqlConnection con = Connect();
+            //MySqlCommand command = con.CreateCommand();
+            //command.CommandText = "select * from apuestas";
 
-            con.Open();
-            MySqlDataReader res = command.ExecuteReader();
+            //con.Open();
+            ///MySqlDataReader res = command.ExecuteReader();
             ApuestaDTO a = null;
             List<ApuestaDTO> apuestas = new List<ApuestaDTO>();
-            while (res.Read())
+            /*while (res.Read())
             {
                 Debug.WriteLine("Recuperado: " + res.GetInt32(0) + " " + res.GetDouble(1) + " " + res.GetString(2) + " " + res.GetDouble(3) + " " + res.GetDouble(4) + " " + res.GetDateTime(5) + " " + res.GetInt32(6) + " " + res.GetString(7));
                 a = new ApuestaDTO(res.GetString(7),res.GetDouble(1), res.GetDouble(3),res.GetString(2), res.GetDouble(4), res.GetDateTime(5));
                 apuestas.Add(a);
-            }
-            con.Close();
-            return apuestas;
+            }*/
+            //con.Close();
+            //return apuestas;
+            return null;
         }
         internal void Save(Apuesta a)
         {
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
+            //MySqlConnection con = Connect();
+            //MySqlCommand command = con.CreateCommand();
             /// para que aunque introduzcas puntos no te transforme el sql en comas
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -73,22 +74,22 @@ namespace PlaceMyBet.Models
             string timeNow;
             timeNow = time.ToString("yyyy-MM-dd HH:mm tt");
             ///creo metodos en la consulta para poder saber si es over o under
-            command.CommandText = "INSERT INTO apuestas (MercadoOverUnder, TipoOverUnder, Cuota, DineroApostado, Fecha, Mercado_id_mercado, Usuario_Email) VALUES ('" + a.MercadoOverUnder + "','" + a.TipoOverUnder + "'," + datoCuota(a.Mercado_id_mercado, a.TipoOverUnder) + ",'" + a.DineroApostado + "','" + timeNow + "'," + a.Mercado_id_mercado + ",'" + a.Usuario_Email + "');";
-            Debug.WriteLine("comando" + command.CommandText);
+            //command.CommandText = "INSERT INTO apuestas (MercadoOverUnder, TipoOverUnder, Cuota, DineroApostado, Fecha, Mercado_id_mercado, Usuario_Email) VALUES ('" + a.MercadoOverUnder + "','" + a.TipoOverUnder + "'," + datoCuota(a.Mercado_id_mercado, a.TipoOverUnder) + ",'" + a.DineroApostado + "','" + timeNow + "'," + a.Mercado_id_mercado + ",'" + a.Usuario_Email + "');";
+            //Debug.WriteLine("comando" + command.CommandText);
             
             ///abro conexiones, creo objeto MercadoRepository para poder acceder a los metodos inplantados de SumaApuesta(a)
             ///y ActualizarCuotas(a), le paso un objeto apuesta para extraer la información para saber donde hacer la actualizacion
-            try
-            {
-                con.Open();
-                command.ExecuteNonQuery();
+            //try
+            //{
+                //con.Open();
+                //command.ExecuteNonQuery();
                 MercadoRepository mercado = new MercadoRepository();
                 mercado.SumaApuesta(a);
                 mercado.ActualizarCuotas(a);
 
-                con.Close();
-            }
-            catch(MySqlException e)
+                //con.Close();
+            //}
+            //catch(MySqlException e)
             {
                 Debug.WriteLine("se ha producido un error de conexion");
             }
@@ -99,7 +100,7 @@ namespace PlaceMyBet.Models
         /// </summary>       
         internal List<ApuestaFilter> GiveApuesta(string email, string tipo)
         {
-            MySqlConnection con = Connect();
+            /*MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "SELECT apuestas.TipoOverUnder, apuestas.Cuota, apuestas.DineroApostado, " +
                 "mercados.Eventos_Identificador_evento FROM apuestas " +
@@ -129,8 +130,8 @@ namespace PlaceMyBet.Models
             {
                 Debug.WriteLine("Se ha producido un error de conexion");
                 return null;
-            }
-
+            }*/
+            return null;
            
         }
         /// <summary>
@@ -138,6 +139,7 @@ namespace PlaceMyBet.Models
         /// </summary>        
         internal List<ApuestaFilter2> GiveApuesta2(int mercado,string email)
         {
+            /*
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "SELECT apuestas.MercadoOverUnder, apuestas.TipoOverUnder, apuestas.Cuota," +
@@ -167,8 +169,8 @@ namespace PlaceMyBet.Models
             {
                 Debug.WriteLine("Se ha producido un error de conexion");
                 return null;
-            }
-
+            }*/
+            return null;
 
         }
         ///el metodo para sacar el dato no lo utilizamos xq puede haber en mercados los mismos tipos, 

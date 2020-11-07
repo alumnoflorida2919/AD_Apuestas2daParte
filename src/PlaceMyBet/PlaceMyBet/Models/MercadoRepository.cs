@@ -13,14 +13,14 @@ namespace PlaceMyBet.Models
     public class MercadoRepository
     {
         const double cuota= 0.95;
-        private MySqlConnection Connect()
+        /*private MySqlConnection Connect()
         {
             string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;uid=root;pwd=;Convert Zero Datetime=true;SslMode=none";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
-        }
+        }*/
         internal List<Mercado> Retrieve()
-        {
+        {/*
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "select * from mercados";
@@ -37,10 +37,12 @@ namespace PlaceMyBet.Models
 
             }
             con.Close();
-            return mercados;            
+            return mercados;
+            */
+            return null;
         }
         internal List<MercadoDTO> RetrieveDTO()
-        {
+        {/*
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "select * from mercados";
@@ -57,14 +59,15 @@ namespace PlaceMyBet.Models
                 
             }
             con.Close();
-            return mercados;
+            return mercados;*/
+            return null;
         }
 
         ///Metodo para acumular el dinero apostado en su celda correspondiente (overo o under)
         public void SumaApuesta(Apuesta a)
         {
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
+            //MySqlConnection con = Connect();
+            //MySqlCommand command = con.CreateCommand();
             // para que aunque introduzcas puntos no te transforme el sql en comas
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -76,17 +79,17 @@ namespace PlaceMyBet.Models
             if (a.TipoOverUnder.ToLower() == "over")
             {    
                 string consulta = string.Format("UPDATE mercados SET DineroApostadoOver = (DineroApostadoOver + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
-                command.CommandText = consulta;                
-                Debug.WriteLine("comando" + command.CommandText);
+                //command.CommandText = consulta;                
+                //Debug.WriteLine("comando" + command.CommandText);
             }
             else{
                 string consulta = string.Format("UPDATE mercados SET DineroApostadoUnder = (DineroApostadoUnder + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
-                command.CommandText = consulta;
-                Debug.WriteLine("comando" + command.CommandText);
+                //command.CommandText = consulta;
+                //Debug.WriteLine("comando" + command.CommandText);
             }
             ///cuando tenermos una de las dos condiciones, cargamos la consulta en el command, abrimos conexion, hacemos consulta
             ///y cerramos conexion
-            try
+            /*try
             {
                 con.Open();
                 command.ExecuteNonQuery();
@@ -95,14 +98,14 @@ namespace PlaceMyBet.Models
             catch (MySqlException e)
             {
 
-            }
+            }*/
             
         }
         public void ActualizarCuotas(Apuesta a)
         {   
             /// creo las formulas para sacar las nuevas cuotas con el objeto mercado cargado
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
+            //MySqlConnection con = Connect();
+            //MySqlCommand command = con.CreateCommand();
             /// para que aunque introduzcas puntos no te transforme el sql en comas
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -112,9 +115,9 @@ namespace PlaceMyBet.Models
             System.Threading.Thread.CurrentThread.CurrentCulture = culInfo;
             /// hay que actualizar tanto CuotaOver y CuotaUnder a la vez
             string consulta = string.Format("UPDATE mercados SET CuotaOver = '{0}' , CuotaUnder = '{1}' WHERE id_mercado = '{2}';", CuotaOver(a), CuotaUnder(a), a.Mercado_id_mercado );
-            command.CommandText = consulta;
-            Debug.WriteLine("comando" + command.CommandText);
-            try
+            //command.CommandText = consulta;
+            //Debug.WriteLine("comando" + command.CommandText);
+            /*try
             {
                 con.Open();
                 command.ExecuteNonQuery();
@@ -123,7 +126,7 @@ namespace PlaceMyBet.Models
             catch (MySqlException e)
             {
 
-            }
+            }*/
 
         }
         /// <summary>
@@ -165,7 +168,7 @@ namespace PlaceMyBet.Models
         /// </summary>
       
         internal List<Mercado> GiveMeMarket(double tipo,int evento)
-        {
+        {/*
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
@@ -198,12 +201,8 @@ namespace PlaceMyBet.Models
             {
                 Debug.WriteLine("Se ha producido un error de conexion");
                 return null;
-            }
-            
-            
-           
-            
-            
+            }*/
+            return null;
         }
 
     }
