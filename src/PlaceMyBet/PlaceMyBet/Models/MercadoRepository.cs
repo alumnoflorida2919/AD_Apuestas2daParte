@@ -78,12 +78,12 @@ namespace PlaceMyBet.Models
 
             if (a.TipoOverUnder.ToLower() == "over")
             {    
-                string consulta = string.Format("UPDATE mercados SET DineroApostadoOver = (DineroApostadoOver + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
+                //string consulta = string.Format("UPDATE mercados SET DineroApostadoOver = (DineroApostadoOver + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
                 //command.CommandText = consulta;                
                 //Debug.WriteLine("comando" + command.CommandText);
             }
             else{
-                string consulta = string.Format("UPDATE mercados SET DineroApostadoUnder = (DineroApostadoUnder + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
+                //string consulta = string.Format("UPDATE mercados SET DineroApostadoUnder = (DineroApostadoUnder + '{0}') WHERE id_mercado ='{1}';", a.DineroApostado, a.Mercado_id_mercado);
                 //command.CommandText = consulta;
                 //Debug.WriteLine("comando" + command.CommandText);
             }
@@ -139,7 +139,7 @@ namespace PlaceMyBet.Models
             m = Retrieve();
             for(int i=0; i < m.Count; i++)
             {
-                if (m[i].MercadoId == a.Mercado_id_mercado)
+                if (m[i].MercadoId == a.MercadoId)
                 {
                     double probOver;
                     probOver = m[i].DineroApostadoOver / (m[i].DineroApostadoOver + m[i].DineroApostadoUnder);
@@ -154,7 +154,7 @@ namespace PlaceMyBet.Models
             m = Retrieve();
             for (int i = 0; i < m.Count; i++)
             {
-                if (m[i].MercadoId == a.Mercado_id_mercado)
+                if (m[i].MercadoId == a.MercadoId)
                 {
                     double probUnder;
                     probUnder = m[i].DineroApostadoUnder / (m[i].DineroApostadoOver + m[i].DineroApostadoUnder);

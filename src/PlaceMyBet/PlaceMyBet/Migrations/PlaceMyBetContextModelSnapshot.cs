@@ -35,17 +35,11 @@ namespace PlaceMyBet.Migrations
                     b.Property<double>("MercadoOverUnder")
                         .HasColumnType("double");
 
-                    b.Property<int>("Mercado_id_mercado")
-                        .HasColumnType("int");
-
                     b.Property<string>("TipoOverUnder")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Usuario_Email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("fecha")
                         .HasColumnType("datetime(6)");
@@ -57,22 +51,31 @@ namespace PlaceMyBet.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Apuesta");
+
+                    b.HasData(
+                        new
+                        {
+                            ApuestaId = 1,
+                            Cuota = 1.8999999999999999,
+                            DineroApostado = 25.0,
+                            MercadoId = 1,
+                            MercadoOverUnder = 1.5,
+                            TipoOverUnder = "over",
+                            UsuarioId = "juan@gmail.com",
+                            fecha = new DateTime(2020, 11, 9, 17, 29, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("PlaceMyBet.Models.Cuenta", b =>
                 {
-                    b.Property<int>("CuentaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("CuentaId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("NombreBanco")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<double>("Saldo")
                         .HasColumnType("double");
-
-                    b.Property<string>("UsuarioEmail")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -103,6 +106,15 @@ namespace PlaceMyBet.Migrations
                     b.HasKey("EventoId");
 
                     b.ToTable("Evento");
+
+                    b.HasData(
+                        new
+                        {
+                            EventoId = 1,
+                            EquipoLocal = "valencia",
+                            EquipoVisitante = "espanyol",
+                            Fecha = new DateTime(2020, 11, 9, 17, 29, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("PlaceMyBet.Models.Mercado", b =>
@@ -126,9 +138,6 @@ namespace PlaceMyBet.Migrations
                     b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventosId")
-                        .HasColumnType("int");
-
                     b.Property<double>("OverUnder")
                         .HasColumnType("double");
 
@@ -137,6 +146,18 @@ namespace PlaceMyBet.Migrations
                     b.HasIndex("EventoId");
 
                     b.ToTable("Mercado");
+
+                    b.HasData(
+                        new
+                        {
+                            MercadoId = 1,
+                            CuotaOver = 2.2000000000000002,
+                            CuotaUnder = 1.8,
+                            DineroApostadoOver = 221.0,
+                            DineroApostadoUnder = 143.0,
+                            EventoId = 1,
+                            OverUnder = 2.5
+                        });
                 });
 
             modelBuilder.Entity("PlaceMyBet.Models.Usuario", b =>
@@ -156,6 +177,15 @@ namespace PlaceMyBet.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = "juan@gmail.com",
+                            Apellido = "lujan",
+                            Nombre = "juan",
+                            edad = 33
+                        });
                 });
 
             modelBuilder.Entity("PlaceMyBet.Models.Apuesta", b =>

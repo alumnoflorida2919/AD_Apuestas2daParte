@@ -48,7 +48,6 @@ namespace PlaceMyBet.Migrations
                     CuotaUnder = table.Column<double>(nullable: false),
                     DineroApostadoOver = table.Column<double>(nullable: false),
                     DineroApostadoUnder = table.Column<double>(nullable: false),
-                    EventosId = table.Column<int>(nullable: false),
                     EventoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -66,11 +65,9 @@ namespace PlaceMyBet.Migrations
                 name: "Cuenta",
                 columns: table => new
                 {
-                    CuentaId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CuentaId = table.Column<string>(nullable: false),
                     NombreBanco = table.Column<string>(nullable: true),
                     Saldo = table.Column<double>(nullable: false),
-                    UsuarioEmail = table.Column<string>(nullable: true),
                     UsuarioId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -95,8 +92,6 @@ namespace PlaceMyBet.Migrations
                     Cuota = table.Column<double>(nullable: false),
                     DineroApostado = table.Column<double>(nullable: false),
                     fecha = table.Column<DateTime>(nullable: false),
-                    Mercado_id_mercado = table.Column<int>(nullable: false),
-                    Usuario_Email = table.Column<string>(nullable: true),
                     UsuarioId = table.Column<string>(nullable: true),
                     MercadoId = table.Column<int>(nullable: false)
                 },
@@ -116,6 +111,26 @@ namespace PlaceMyBet.Migrations
                         principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Evento",
+                columns: new[] { "EventoId", "EquipoLocal", "EquipoVisitante", "Fecha" },
+                values: new object[] { 1, "valencia", "espanyol", new DateTime(2020, 11, 9, 17, 29, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Usuario",
+                columns: new[] { "UsuarioId", "Apellido", "Nombre", "edad" },
+                values: new object[] { "juan@gmail.com", "lujan", "juan", 33 });
+
+            migrationBuilder.InsertData(
+                table: "Mercado",
+                columns: new[] { "MercadoId", "CuotaOver", "CuotaUnder", "DineroApostadoOver", "DineroApostadoUnder", "EventoId", "OverUnder" },
+                values: new object[] { 1, 2.2000000000000002, 1.8, 221.0, 143.0, 1, 2.5 });
+
+            migrationBuilder.InsertData(
+                table: "Apuesta",
+                columns: new[] { "ApuestaId", "Cuota", "DineroApostado", "MercadoId", "MercadoOverUnder", "TipoOverUnder", "UsuarioId", "fecha" },
+                values: new object[] { 1, 1.8999999999999999, 25.0, 1, 1.5, "over", "juan@gmail.com", new DateTime(2020, 11, 9, 17, 29, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Apuesta_MercadoId",

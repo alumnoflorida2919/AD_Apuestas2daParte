@@ -12,7 +12,7 @@ namespace PlaceMyBet.Models
         {
 
         }
-        public Mercado(int mercadoId, double overUnder, double cuotaOver, double cuotaUnder, double dineroApostadoOver, double dineroApostadoUnder, int eventosId)
+        public Mercado(int mercadoId, double overUnder, double cuotaOver, double cuotaUnder, double dineroApostadoOver, double dineroApostadoUnder, int eventoId)
         {
             MercadoId = mercadoId;
             OverUnder = overUnder;
@@ -20,7 +20,7 @@ namespace PlaceMyBet.Models
             CuotaUnder = cuotaUnder;
             DineroApostadoOver = dineroApostadoOver;
             DineroApostadoUnder = dineroApostadoUnder;
-            EventosId = eventosId;
+            EventoId = eventoId;
         }
 
         public int MercadoId { get; set; }
@@ -29,7 +29,7 @@ namespace PlaceMyBet.Models
         public double CuotaUnder { get; set; }
         public double DineroApostadoOver { get; set; }
         public double DineroApostadoUnder { get; set; }
-        public int EventosId { get; set; }
+        //public int EventosId { get; set; } esta propiedad es la fk de EventoId
         //MERCADOS 1 - N APUESTAS
         public List<Apuesta> Apuestas { get; set; }//en un mercado puede haber muchas apuestas
         //SE CREA PRIMERO EVENTO Y LUEGO MERCADO. EVENTOS 1 - N MERCADOS.

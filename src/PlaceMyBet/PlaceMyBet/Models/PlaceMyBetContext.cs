@@ -34,14 +34,23 @@ namespace PlaceMyBet.Models
         }
 
         //Inserció inicial de dades
-        /*
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Grupo>().HasData(new Grupo(1, "Iron Maiden"));
-            modelBuilder.Entity<Grupo>().HasData(new Grupo(2, "Gamma Ray"));
-            modelBuilder.Entity<Grupo>().HasData(new Grupo(3, "Stratovarius"));
-            modelBuilder.Entity<Disco>().HasData(new Disco(1, "The number of the beast", 1982, 1));
-            modelBuilder.Entity<Disco>().HasData(new Disco(2, "Land of the free", 1998, 2));
-        }*/
+            DateTime time = DateTime.Now;
+            DateTime timeDate;
+            string timeNow;
+            timeNow = time.ToString("yyyy-MM-dd HH:mm tt");
+            //me chilla el timNow y lo intento parsear a dateTime
+            timeDate=Convert.ToDateTime(timeNow);
+
+
+
+            //modelBuilder.Entity<Cuenta>().HasData(new Cuenta(1,"Santander",1000,"juan@gmail.com")); no tengo creado el constructor, lo creo para introducir datos??
+            modelBuilder.Entity<Usuario>().HasData(new Usuario("juan@gmail.com", "juan", "lujan", 33));
+            modelBuilder.Entity<Evento>().HasData(new Evento(1,"valencia","espanyol",timeDate));
+            modelBuilder.Entity<Mercado>().HasData(new Mercado(1, 2.5, 2.2, 1.8, 221, 143, 1));
+            modelBuilder.Entity<Apuesta>().HasData(new Apuesta(1, 1.5, "over", 1.9, 25, timeDate,"juan@gmail.com",1));
+        }
     }
 }

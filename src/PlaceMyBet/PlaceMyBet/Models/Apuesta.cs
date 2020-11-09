@@ -12,7 +12,7 @@ namespace PlaceMyBet.Models
         {
 
         }
-        public Apuesta(int apuestaId, double mercadoOverUnder, string tipoOverUnder, double cuota, double dineroApostado, DateTime fecha, int mercadoId, string usuarioId)
+        public Apuesta(int apuestaId, double mercadoOverUnder, string tipoOverUnder, double cuota, double dineroApostado, DateTime fecha, string usuarioId, int mercadoId)
         {
             ApuestaId=apuestaId;
             MercadoOverUnder = mercadoOverUnder;
@@ -20,8 +20,9 @@ namespace PlaceMyBet.Models
             Cuota = cuota;
             DineroApostado = dineroApostado;
             this.fecha = fecha;
-            MercadoId= mercadoId;
             UsuarioId = usuarioId;
+            MercadoId = mercadoId;
+            
             
             
         }
@@ -32,8 +33,8 @@ namespace PlaceMyBet.Models
         public double Cuota { get; set; }
         public double DineroApostado { get; set; }
         public DateTime fecha { get; set; }
-        public int Mercado_id_mercado { get; set; }//este el la FK de mercadosId, se tiene que borrar?? 
-        public string Usuario_Email { get; set; }//este es la foreign key de usuario Id, se tiene que borrar??
+        //public int Mercado_id_mercado { get; set; }//este el la FK de mercadosId, se tiene que borrar?? 
+        //public string Usuario_Email { get; set; }//este es la foreign key de usuario Id, se tiene que borrar??
         //USUARIO 1- N APUESTA
         public string UsuarioId { get; set; }//clave foranea de usuarioEmail
         public Usuario Usuario { get; set; }//una apuesta solo puede ser hecha por un usuario
