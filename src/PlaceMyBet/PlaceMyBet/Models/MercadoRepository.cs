@@ -13,33 +13,33 @@ namespace PlaceMyBet.Models
     public class MercadoRepository
     {
         const double cuota= 0.95;
-        /*private MySqlConnection Connect()
-        {
-            string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;uid=root;pwd=;Convert Zero Datetime=true;SslMode=none";
-            MySqlConnection con = new MySqlConnection(connString);
-            return con;
-        }*/
+        /// <summary>
+        /// Muestra todos los mercados
+        /// </summary>
+        /// <returns>devuelve una lista de mercados</returns>
         internal List<Mercado> Retrieve()
-        {/*
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from mercados";
-
-            con.Open();
-            MySqlDataReader res = command.ExecuteReader();
-            Mercado m = null;
+        {
             List<Mercado> mercados = new List<Mercado>();
-            while (res.Read())
+            using (PlaceMyBetContext context =new PlaceMyBetContext())
             {
-                Debug.WriteLine("Recuperado: " + res.GetInt32(0) + " " + res.GetDouble(1) + " " + res.GetDouble(2) + " " + res.GetDouble(3) + " " + res.GetDouble(4) + " " + res.GetDouble(5) + " " + res.GetInt32(6));
-                m = new Mercado(res.GetInt32(0), res.GetDouble(1), res.GetDouble(2), res.GetDouble(3), res.GetDouble(4), res.GetDouble(5), res.GetInt32(6));
-                mercados.Add(m);
-
+                mercados = context.Mercado.ToList();
             }
-            con.Close();
             return mercados;
-            */
-            return null;
+        }
+        /// <summary>
+        /// Devuelvo una lista de mercados con determinado id
+        /// </summary>
+        /// <returns></returns>
+        internal Mercado Retrieve(int id)
+        {
+            Mercado mercados;
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                mercados = context.Mercado
+                    .Where(s => s.MercadoId == id)
+                    .FirstOrDefault();
+            }
+            return mercados;
         }
         internal List<MercadoDTO> RetrieveDTO()
         {/*

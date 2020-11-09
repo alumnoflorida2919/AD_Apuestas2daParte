@@ -12,11 +12,11 @@ namespace PlaceMyBet.Controllers
     {
         // GET: api/Apuestas
        // [Authorize(Roles = "Admin")]
-        public IEnumerable<ApuestaDTO> Get()
+        public IEnumerable<Apuesta> Get()
         {
             var repo = new ApuestaRepository();
-            //List<Apuesta> apuestas = repo.Retrieve();
-            List<ApuestaDTO> apuestas = repo.RetrieveDTO();
+            List<Apuesta> apuestas = repo.Retrieve();
+            //List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             return apuestas;
         }
         /// <summary>
@@ -46,9 +46,12 @@ namespace PlaceMyBet.Controllers
         // GET: api/Apuestas/5
         public Apuesta Get(int id)
         {
+            var repo = new ApuestaRepository();
+            Apuesta apuestas = repo.Retrieve(id);
+            return apuestas;
             /*var repo = new ApuestaRepository();
             Apuesta a = repo.Retrieve();*/
-            return null;
+            //return null;
         }
         //[Authorize]//solo los usuarios logueados pueden hacer apuestas
         // POST: api/Apuestas
