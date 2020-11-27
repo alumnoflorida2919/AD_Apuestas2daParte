@@ -41,6 +41,13 @@ namespace PlaceMyBet.Models
             }
             return mercados;
         }
+        internal void Save(Mercado m)
+        {
+            PlaceMyBetContext context = new PlaceMyBetContext();
+
+            context.Mercado.Add(m);
+            context.SaveChanges();
+        }
         internal List<MercadoDTO> RetrieveDTO()
         {/*
             MySqlConnection con = Connect();
