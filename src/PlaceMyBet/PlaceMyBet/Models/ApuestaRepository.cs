@@ -38,7 +38,6 @@ namespace PlaceMyBet.Models
             }
             return apuestas;
         }
-        
         /// <summary>
         /// devuelvo la apuesta con un id determinado
         /// </summary>
@@ -53,7 +52,6 @@ namespace PlaceMyBet.Models
             }
             return apuestas;
         }
-
         internal void Save(Apuesta a)
         {
             //Agregar fecha
@@ -83,8 +81,10 @@ namespace PlaceMyBet.Models
             context.Mercado.Update(mercado);
             context.Mercado.Update(mercado);
             context.SaveChanges();
-        }
-        //le paso tambien mercado para tener su id
+        }        
+        //convertiremos una apuesta en una ApuestaDTO 
+        //en la Apuesta a2 traemos a traves de context todo lo de apuestas e incluimos lo de mercado. 
+        // y el FirsOrDefault quiere decir traeme el mercado (apu => apu.ApuestaId) que sea igual a ApuestaId(a.ApuestaId)
         public static ApuestaDTO ToDTO(Apuesta a)
         {
             PlaceMyBetContext context = new PlaceMyBetContext();

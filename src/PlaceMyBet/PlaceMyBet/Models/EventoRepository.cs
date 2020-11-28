@@ -32,36 +32,30 @@ namespace PlaceMyBet.Models
             context.Evento.Add(e);
             context.SaveChanges();
         }
-
-        internal List<EventoDTO> RetrieveDTO() //internal es como un public pero un poco mas restrictivo
-        {/*
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from Eventos";
-
-            try
+        internal void Update(int id, string local, string visitante)
+        {
+            Evento eventos;
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
             {
+                eventos = context.Evento
+                    .Where(s => s.EventoId == id)
+                    .FirstOrDefault();
+                eventos.EquipoLocal = local;
+                eventos.EquipoVisitante = visitante;
+                context.Evento.Update(eventos);
+                context.SaveChanges();
+            }          
 
-                con.Open();
-                MySqlDataReader res = command.ExecuteReader();
-                EventoDTO e = null;
-                List<EventoDTO> eventos = new List<EventoDTO>();
-                while (res.Read())
-
-                {
-                    Debug.WriteLine("Recuperado:" + res.GetInt32(0) + " " + res.GetString(1) + " " + res.GetString(2) + " " + res.GetDateTime(3));
-                    e = new EventoDTO(res.GetString(1), res.GetString(2), res.GetDateTime(3));
-                    eventos.Add(e);
-                }
-                con.Close();
-                return eventos;
-            }
-            catch (MySqlException e)
-            {
-                Debug.WriteLine("Se ha producido un error de conexion");
-                return null;
-            }*/
-            return null;
+        }
+        internal void DeleteEvent(int id)
+        {
+            Evento eventos;
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            eventos = context.Evento
+                    .Where(s => s.EventoId == id)
+                    .FirstOrDefault();
+            context.Evento.Remove(eventos);
+            context.SaveChanges();
         }
     }
 }
