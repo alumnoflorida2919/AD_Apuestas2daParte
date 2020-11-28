@@ -109,38 +109,14 @@ namespace PlaceMyBet.Models
             
         }
         public void ActualizarCuotas(Apuesta a)
-        {   /*
-            /// creo las formulas para sacar las nuevas cuotas con el objeto mercado cargado
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            /// para que aunque introduzcas puntos no te transforme el sql en comas
-            CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
-            culInfo.NumberFormat.NumberDecimalSeparator = ".";
-            culInfo.NumberFormat.CurrencyDecimalSeparator = ".";
-            culInfo.NumberFormat.PercentDecimalSeparator = ".";
-            culInfo.NumberFormat.CurrencyDecimalSeparator = ".";
-            System.Threading.Thread.CurrentThread.CurrentCulture = culInfo;
-            /// hay que actualizar tanto CuotaOver y CuotaUnder a la vez
-            string consulta = string.Format("UPDATE mercados SET CuotaOver = '{0}' , CuotaUnder = '{1}' WHERE id_mercado = '{2}';", CuotaOver(a), CuotaUnder(a), a.Mercado_id_mercado );
-            command.CommandText = consulta;
-            Debug.WriteLine("comando" + command.CommandText);
-            try
-            {
-                con.Open();
-                command.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (MySqlException e)
-            {
-
-            }*/
-
+        {   
+           
         }
         /// <summary>
         /// recojo el objeto mercado cargado del retrive y lo recorro haciendole una condicion
         /// </summary>
        
-        private double CuotaOver(Apuesta a)
+        internal double CuotaOver(Apuesta a)
         {
             List<Mercado> m = new List<Mercado>();
             m = Retrieve();
@@ -155,7 +131,7 @@ namespace PlaceMyBet.Models
             }
             return 0;
         }
-        private double CuotaUnder(Apuesta a)
+        internal double CuotaUnder(Apuesta a)
         {
             List<Mercado> m = new List<Mercado>();
             m = Retrieve();

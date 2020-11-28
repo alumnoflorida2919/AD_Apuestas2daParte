@@ -38,6 +38,40 @@ namespace PlaceMyBet.Models
             }
             return apuestas;
         }
+
+        internal void Save(Apuesta a)
+        {
+            //Agregar fecha
+            DateTime time = DateTime.Now;
+            a.fecha = time;
+            //Recuperar mercado asociado
+            MercadoRepository mercadoRepository = new MercadoRepository();
+            Mercado mercado = mercadoRepository.Retrieve(a.MercadoId);            
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            //context.Apuesta.Add(a);
+            //context.SaveChanges();
+            //Actualizo en Mercado el dinero apostado y actualizo la cuota de apuesta (la traigo de mercado)
+            if (a.TipoOverUnder.ToLower() == "over")
+            {
+                mercado.DineroApostadoOver += a.DineroApostado;
+                a.Cuota = mercado.CuotaOver;
+            }
+            else
+            {
+                mercado.DineroApostadoUnder+= a.DineroApostado;
+                a.Cuota = mercado.CuotaUnder;
+            }
+            context.Mercado.Update(mercado);
+            context.SaveChanges();
+            //actualizo cuota Under y Over en mercado, 
+            mercado.CuotaOver=mercadoRepository.CuotaOver(a);
+            mercado.CuotaUnder = mercadoRepository.CuotaUnder(a);
+            context.Apuesta.Add(a);
+            context.Mercado.Update(mercado);
+            context.Mercado.Update(mercado);
+            context.SaveChanges();
+        }
+
         internal List<ApuestaDTO> RetrieveDTO()
         {
 
@@ -59,6 +93,7 @@ namespace PlaceMyBet.Models
             //return apuestas;
             return null;
         }
+        /*
         internal void Save(Apuesta a)
         {
             //MySqlConnection con = Connect();
@@ -95,7 +130,7 @@ namespace PlaceMyBet.Models
                 Debug.WriteLine("se ha producido un error de conexion");
             }
 
-        }
+        }*/
         /// <summary>
         /// consulta para traer de apuestas los campos de abajo fitrado por email y tipo.
         /// </summary>       

@@ -22,9 +22,6 @@ namespace PlaceMyBet.Models
             this.fecha = fecha;
             UsuarioId = usuarioId;
             MercadoId = mercadoId;
-            
-            
-            
         }
 
         public int ApuestaId { get; set; }
