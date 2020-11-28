@@ -23,6 +23,7 @@ namespace PlaceMyBet.Models
             List<Mercado> mercados = new List<Mercado>();
             using (PlaceMyBetContext context =new PlaceMyBetContext())
             {
+                //Incluir Evento y no salga nulo
                 mercados = context.Mercado.Include(p => p.Evento).ToList();
             }
             return mercados;

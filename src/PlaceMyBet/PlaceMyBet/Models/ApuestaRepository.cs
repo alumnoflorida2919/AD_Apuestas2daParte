@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -20,7 +21,8 @@ namespace PlaceMyBet.Models
             List<Apuesta> apuestas = new List<Apuesta>();
             using(PlaceMyBetContext context = new PlaceMyBetContext())
             {
-                apuestas = context.Apuesta.ToList();
+                //incluir Mercado y no salga nulo
+                apuestas = context.Apuesta.Include(prop => prop.Mercado).ToList();
             }
             return apuestas;
         }
