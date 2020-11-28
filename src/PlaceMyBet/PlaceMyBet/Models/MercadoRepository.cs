@@ -25,6 +25,19 @@ namespace PlaceMyBet.Models
             {
                 //Incluir Evento y no salga nulo
                 mercados = context.Mercado.Include(p => p.Evento).ToList();
+                
+            }
+            return mercados;
+        }
+        //Convertir Mercado en MercadoDTO
+        internal List<MercadoDTO> RetrieveDTO()
+        {
+            List<MercadoDTO> mercados = new List<MercadoDTO>();
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                mercados = context.Mercado
+                    .Select(p => ToDTO(p))
+                    .ToList();
             }
             return mercados;
         }
@@ -50,26 +63,9 @@ namespace PlaceMyBet.Models
             context.Mercado.Add(m);
             context.SaveChanges();
         }
-        internal List<MercadoDTO> RetrieveDTO()
-        {/*
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from mercados";
-
-            con.Open();
-            MySqlDataReader res = command.ExecuteReader();
-            MercadoDTO m = null;
-            List<MercadoDTO> mercados = new List<MercadoDTO>();
-            while (res.Read())
-            {
-                Debug.WriteLine("Recuperado: " + res.GetInt32(0) + " " + res.GetDouble(1) + " " + res.GetDouble(2) + " " + res.GetDouble(3) + " " + res.GetDouble(4) + " " + res.GetDouble(5) + " " + res.GetInt32(6));
-                m = new MercadoDTO(res.GetDouble(1), res.GetDouble(2), res.GetDouble(3));
-                mercados.Add(m);
-                
-            }
-            con.Close();
-            return mercados;*/
-            return null;
+        public static MercadoDTO ToDTO(Mercado m)
+        {
+            return new MercadoDTO(m.OverUnder, m.CuotaOver, m.CuotaUnder);
         }
 
         ///Metodo para acumular el dinero apostado en su celda correspondiente (overo o under)
