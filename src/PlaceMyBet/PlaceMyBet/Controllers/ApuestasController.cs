@@ -12,37 +12,13 @@ namespace PlaceMyBet.Controllers
     {
         // GET: api/Apuestas
        // [Authorize(Roles = "Admin")]
-        public IEnumerable<Apuesta> Get()
+        public IEnumerable<ApuestaDTO> Get()
         {
             var repo = new ApuestaRepository();
-            List<Apuesta> apuestas = repo.Retrieve();
+            List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             //List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             return apuestas;
         }
-        /// <summary>
-        /// Metodo para filtrar apuestas a traves de Email y Tipo
-        /// </summary>        
-        // GET: api/Apuestas?Email=Email&tipo=tipo
-        //[Authorize(Roles = "Admin")]//Autorizo solo a ADMIN a hacer la consulta
-        public IEnumerable<ApuestaFilter> GetApuesta(string email, string tipo)
-        {
-            var repo = new ApuestaRepository();
-            //List<Apuesta> apuestas = repo.Retrieve();
-            List<ApuestaFilter> apuestas = repo.GiveApuesta(email,tipo);
-            return apuestas;
-        }
-        /// <summary>
-        /// Metodo para filtrar a traves de Mercado_id_mercado y Email
-        /// </summary>
-        // GET: api/Apuestas?Mercado_id_mercado=Mercado_id_mercado&Email=Email
-        public IEnumerable<ApuestaFilter2> GetApuesta2(int mercado,string email)
-        {
-            var repo = new ApuestaRepository();
-            //List<Apuesta> apuestas = repo.Retrieve();
-            List<ApuestaFilter2> apuestas = repo.GiveApuesta2(mercado,email);
-            return apuestas;
-        }
-
         // GET: api/Apuestas/5
         public Apuesta Get(int id)
         {

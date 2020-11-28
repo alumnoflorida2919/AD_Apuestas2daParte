@@ -42,21 +42,21 @@ namespace PlaceMyBet.Models
     }
     public class ApuestaDTO
     {
-        public ApuestaDTO( string usuario_Email, double mercadoOverUnder,double cuota, string tipoOverUnder, double dineroApostado, DateTime fecha)
+        public ApuestaDTO(string usuario_Email, int eventoId, string tipoOverUnder, double cuota, double dineroApostado)
         {
             Usuario_Email = usuario_Email;
-            TipoOverUnder = tipoOverUnder.ToLower();
+            EventoId = eventoId;
+            TipoOverUnder = tipoOverUnder;
             Cuota = cuota;
-            MercadoOverUnder = mercadoOverUnder;        
             DineroApostado = dineroApostado;
-            this.fecha = fecha;
         }
-        public string Usuario_Email { get; set; }
-        public double MercadoOverUnder { get; set; }        
-        public double Cuota { get; set; }
+
+        public string Usuario_Email { get; set; }        
+        public int EventoId { get; set; }
         public string TipoOverUnder { get; set; }
+        public double Cuota { get; set; }
         public double DineroApostado { get; set; }
-        public DateTime fecha { get; set; }
+        
     }   
 
     public class ApuestaFilter
