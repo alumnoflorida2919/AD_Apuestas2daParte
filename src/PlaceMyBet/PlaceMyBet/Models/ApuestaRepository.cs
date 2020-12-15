@@ -38,6 +38,12 @@ namespace PlaceMyBet.Models
             }
             return apuestas;
         }
+
+        internal Apuesta RetrieveApuesta(double apuesta)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// devuelvo la apuesta con un id determinado
         /// </summary>

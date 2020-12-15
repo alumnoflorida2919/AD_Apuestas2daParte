@@ -57,7 +57,24 @@ namespace PlaceMyBet.Models
         public double Cuota { get; set; }
         public double DineroApostado { get; set; }
         
-    }   
+    }
+    //Creo el constructor con los datos que quiero mostrar
+    public class ApuestaFiltroDinero
+    {
+        public ApuestaFiltroDinero(string tipoOverUnder, string equipoLocal, string equipoVisitante)
+        {            
+            TipoOverUnder = tipoOverUnder;
+            EquipoLocal = equipoLocal;
+            EquipoVisitante = equipoVisitante;
+        }
+
+        public string TipoOverUnder { get; set; }
+        public string EquipoLocal { get; set; }
+        public string EquipoVisitante { get; set; }
+
+    }
+
+    
 
     public class ApuestaFilter
     {
