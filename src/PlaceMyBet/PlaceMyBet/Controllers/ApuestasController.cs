@@ -29,6 +29,13 @@ namespace PlaceMyBet.Controllers
             Apuesta a = repo.Retrieve();*/
             //return null;
         }
+        //Llamo a repository su metodo llevandole el dinero de la apuesta
+        public IEnumerable<ApuestaFiltroDinero> Get(double apuesta)
+        {
+            var repo = new ApuestaRepository();
+            List<ApuestaFiltroDinero> apuestas = repo.RetrieveApuesta(apuesta);
+            return apuestas;            
+        }
         //[Authorize]//solo los usuarios logueados pueden hacer apuestas
         // POST: api/Apuestas
         public void Post([FromBody]Apuesta apuesta)
