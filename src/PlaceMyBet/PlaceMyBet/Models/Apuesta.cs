@@ -73,8 +73,20 @@ namespace PlaceMyBet.Models
         public string EquipoVisitante { get; set; }
 
     }
+    public class ApuestaFilterId
+    {
+        public ApuestaFilterId(double dineroApostado, string tipoOverUnder, string nombre)
+        {
+            DineroApostad = dineroApostado;
+            TipoOverUnder = tipoOverUnder;
+            Nombre = nombre;
+        }
+        public double DineroApostad { get; set; }
+        public string TipoOverUnder { get; set; }
+        public string Nombre { get; set; }
+    }
 
-    
+
 
     public class ApuestaFilter
     {

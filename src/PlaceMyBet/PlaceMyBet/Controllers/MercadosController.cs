@@ -20,8 +20,9 @@ namespace PlaceMyBet.Controllers
         }       
         public Mercado Get(int id)
         {
-            var repo = new MercadoRepository();            
-            Mercado mercados = repo.Retrieve(id);
+            var repo = new MercadoRepository();    
+            
+            Mercado mercados = repo.RetrieveFilter(id);
             return mercados;            
         }
 

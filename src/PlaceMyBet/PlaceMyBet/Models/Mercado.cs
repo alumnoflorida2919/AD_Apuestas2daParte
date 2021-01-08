@@ -49,4 +49,6 @@ namespace PlaceMyBet.Models
         public double CuotaOver { get; set; }
         public double CuotaUnder { get; set; }
     }
+    
+
 }

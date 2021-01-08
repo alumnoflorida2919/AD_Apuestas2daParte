@@ -29,6 +29,27 @@ namespace PlaceMyBet.Models
             }
             return mercados;
         }
+
+        internal ApuestaFilterId RetrieveFilter(int id)
+        {
+            ApuestaFilterId apuestaFilterId;
+            Mercado mercado;
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            mercado = context.Mercado
+                .Where(s => s.MercadoId == id)
+                .FirstOrDefault();
+               
+           apuestaFilterId =ToDTOFilter(mercado);
+            return apuestaFilterId;
+        }
+
+        public static ApuestaFilterId ToDTOFilter(Mercado mercado)
+        {
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            Mercado m = context.Mercado.Include(apu => apu.Apuestas).FirstOrDefault();
+            return new ApuestaFilterId(m.Apuestas.DineroApostado, m.Apuestas.TipoOverUnder, m.Apuestas.UsuarioId);
+        }
+
         //Convertir Mercado en MercadoDTO
         internal List<MercadoDTO> RetrieveDTO()
         {

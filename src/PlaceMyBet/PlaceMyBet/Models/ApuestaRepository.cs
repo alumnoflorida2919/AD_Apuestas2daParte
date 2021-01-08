@@ -39,10 +39,21 @@ namespace PlaceMyBet.Models
             return apuestas;
         }
 
-        internal Apuesta RetrieveApuesta(double apuesta)
+        internal List<ApuestaFiltroDinero> RetrieveApuesta(double apuesta)
         {
-            throw new NotImplementedException();
+            List<ApuestaFiltroDinero> apuestaFiltroDinero = new List<ApuestaFiltroDinero>();
+           using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                
+                apuestaFiltroDinero = context.Apuesta
+                    .Where(p => p.DineroApostado > apuesta)//condiciono que me de la lista cuyo dinero apostado sea mayor de apuesta
+                    .Select(s => s ToDTOFiltro(s))
+                    .ToList();
+            }
+            return apuestaFiltroDinero;
         }
+
+        
 
         /// <summary>
         /// devuelvo la apuesta con un id determinado
@@ -96,6 +107,14 @@ namespace PlaceMyBet.Models
             PlaceMyBetContext context = new PlaceMyBetContext();
             Apuesta a2 = context.Apuesta.Include(apu => apu.Mercado).FirstOrDefault(apu => apu.ApuestaId == a.ApuestaId);
             return new ApuestaDTO(a2.UsuarioId, a2.Mercado.EventoId, a2.TipoOverUnder, a2.Cuota, a2.DineroApostado);
-        }  
+        } 
+        //Metodo que devuelve el objeto cargado como apuestaFilter
+        public static ApuestaFiltroDinero ToDTOFiltro(Apuesta apuesta)
+        {
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            Apuesta a = context.Apuesta.Include(apu => apu.Mercado).FirstOrDefault(apu => apu.Cuota > apuesta.Cuota);
+            return new ApuestaFiltroDinero(a.TipoOverUnder, a.Mercado.EquipoLocal, a.Mercado.EquipoVisitante);
+
+        }
     }
 }
